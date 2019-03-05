@@ -1,22 +1,32 @@
 package chatUI
 import javafx.event.ActionEvent
-
 import scalafx.Includes._
 import scalafx.application
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, TextArea, TextField}
 import scalafx.scene.paint.Color._
-import scalafx.scene.shape.{Rectangle}
-import scalafx.scene.text._
+import scalafx.scene.shape.Rectangle
 import chatApp._
+import scalafx.animation.AnimationTimer
 
 
 object chatUI extends JFXApp {
 
-  val curUser = new user("testUser")
+  val curUser = new user("testUser1")
+  val curChat = curUser.chatWith(new user("testUser2"))
 
 
+  val inputDisplay: TextArea = new TextArea {
+    style = "-fx-font: 18 ariel;"
+    prefWidth = 680
+    prefHeight = 210
+    layoutX = 300
+    layoutY = 500
+    wrapText = true
+    //width = 700
+    //height = 300
+  }
 
   val sendButton: Button = new Button {
     text = "Send"
@@ -27,19 +37,12 @@ object chatUI extends JFXApp {
     layoutX = 905
     layoutY = 720
 
-    //onAction = (event: ActionEvent) => sendMessage();
+    onAction = (event: ActionEvent) => {
+      curChat.addChat(curUser, inputDisplay.text.value)
+      inputDisplay.text.value = ""
+    };
   }
 
-  val inputDisplay: TextArea = new TextArea {
-    style = "-fx-font: 18 ariel;"
-    prefWidth = 680
-    prefHeight = 210
-    layoutX = 300
-    layoutY = 500
-    wrapText = true
-     //width = 700
-     //height = 300
-  }
 
   val searchUser: TextField = new TextField{
     layoutX = 20
@@ -64,7 +67,7 @@ object chatUI extends JFXApp {
     fill <== when(hover) choose LightGrey otherwise WhiteSmoke
   }
 
-  val historyDisplay = new TextArea("Heyi, I love you!!! Don't leave me!!! Please!!! I want to born a child for you!!!"){
+  val historyDisplay = new TextArea(""){
     style = "-fx-font: 22 ariel"
     layoutX = 300
     layoutY = 0
@@ -82,7 +85,15 @@ object chatUI extends JFXApp {
     scene = new Scene{
       fill = White
       content = List(chatSelect, inputDisplay,sendButton, historyDisplay, searchUser, searchButton)
+
     }
+    AnimationTimer(update).start()
+  }
+
+  def update(time: Long): Unit ={
+
+      historyDisplay.text.value = curChat.chatHistory()
+
   }
 
 }

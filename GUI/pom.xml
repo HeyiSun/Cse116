@@ -27,6 +27,16 @@
             <version>11-R16</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.sksamuel.scalax/scalax -->
+        <dependency>
+            <groupId>com.sksamuel.scalax</groupId>
+            <artifactId>scalax_2.12.0-M3</artifactId>
+            <version>1.26.0</version>
+        </dependency>
+
+
+
+
     </dependencies>
 
 </project>
