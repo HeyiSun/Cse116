@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<script src="chatApp.js"></script>
 <style>
 #header {
     background-color:black;
@@ -24,17 +25,45 @@
 }
 
 #chatHistory{
+	width:556px;
     height:165px;
+    border:none;
+    resize:none;
+    margin: 0px 0px 0px 3px
 }
 
 #inputArea{
-    width:559px;
+    width:556px;
     height:90px;
     float:up;
     #border:none;
+    resize:none;
+    margin: 0px 0px 0px 3px;
 }
 
-#ContactButton {
+#searchInput{
+    width:80px;
+    height:15px;
+    color:black;
+    margin:0px 0px 0px 3px;
+    vertical-align: middle;
+}
+
+#sendButton,
+#searchButton{
+    width:55px;
+    height:25px;
+    font-size: 12px;
+    float:right;
+    padding: 0px 1px 2px 1px;
+    vertical-align: middle;
+}
+
+#contactButton1,
+#contactButton2,
+#contactButton3,
+#contactButton4,
+#contactButton5{
     background-color:#dddddd;
     width:160px;
     height:49px;
@@ -44,36 +73,32 @@
     cursor: pointer;
 }
 
-#sendButton{
-    float:right;
-}
-
 
 </style>
 </head>
 
-<body>
+<body onload="loadChat();">
 
 <div id="header">
 ChatApp
 </div>
 
 <div id="nav">
-<button id="ContactButton">Empty</button><br>
-<button id="ContactButton">Empty</button><br>
-<button id="ContactButton">Empty</button><br>
-<button id="ContactButton">Empty</button><br>
-<button id="ContactButton">Empty</button><br>
-<button id="ContactButton">Empty</button><br>
+<input type="text" id="searchInput">
+<button id="searchButton" style="margin: 13px 3px 0px 0px;">Search</button>
+<button id="contactButton1">Empty</button><br>
+<button id="contactButton2">Empty</button><br>
+<button id="contactButton3">Empty</button><br>
+<button id="contactButton4">Empty</button><br>
+<button id="contactButton5">Empty</button><br>
 </div>
 
 <div id="section">
-    <div id="chatHistory">
-    ChatHistory
-    </div>
+    <textarea id="chatHistory" readonly="readonly">
+    </textarea>
     </br>
     <textarea id="inputArea"></textarea>
-    <button id="sendButton">Send</button>
+    <button onClick="sendMessage();" id="sendButton" style="margin: 3px 0px 0px 0px;">Send  </button>
 </div>
 
 </body>
